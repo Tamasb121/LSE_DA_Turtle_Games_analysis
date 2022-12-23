@@ -63,7 +63,9 @@ library(tidyverse)
 # Import the data set (turtle_sales.csv).
 ## Change the working directory if needed. 
 ## setwd(dir='c:/Users/Tamas/Python/Assignment3')
-## Or choose csv file from outside the current working directory.
+
+## If the file does not load. 
+## Choose csv file from outside the current working directory.
 ## sales <- read.csv(file.choose(), header=TRUE)
 sales <- read.csv('turtle_sales.csv', header=TRUE)
 
@@ -116,7 +118,8 @@ qplot(Ranking,
       geom=c('point', 'jitter'))+
   labs(title = "Global Sales by Ranking",
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Look for more detail in top 100 Global Sales of Turtle Games.
 sales_subset <- filter(sales, Ranking < 100)
@@ -126,7 +129,8 @@ qplot(Ranking,
       geom=c('point', 'jitter'))+ 
   labs(title = "Global Sales by Ranking",
        subtitle = 'Turtle Games Top 100')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Check Nintendo games.
 qplot(Ranking,
@@ -136,7 +140,8 @@ qplot(Ranking,
       geom=c('point', 'jitter'))+
   labs(title = "Global Sales by Ranking",
        subtitle = 'Turtle Games Top 100')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Look at game releases by year.
 qplot(Year,
@@ -144,7 +149,8 @@ qplot(Year,
       data=sales)+
   labs(title = "Global Sales by release year",
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Find duplicate rows.
 duplicated(sales)
@@ -238,22 +244,27 @@ df$Sales_gap = (df$NA_Sales - df$EU_Sales)
 qplot(Global_Sales, Platform, data=sales)+
   labs(title = "Global Sales by platform",
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Checking the other categories, a barplot could be more useful.
-qplot(Global_Sales, Genre, data=sales)
-qplot(Global_Sales, Publisher , data=sales)
+qplot(Global_Sales, Genre, data=sales) +
+  theme_classic()
+qplot(Global_Sales, Publisher , data=sales) +
+  theme_classic()
 
 # Checking if sales is impacted by how long it has been released.
 qplot(Year, Global_Sales,
       data=sales)+
   labs(title = "Global Sales by Year of First Release ",
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Checking distribution by product.
 is.character(df$Product)
-qplot(Product, Global_Sales, data=df)
+qplot(Product, Global_Sales, data=df) +
+  theme_classic()
 
 # Found one outlier.
 View(subset(df, Product == '107'))
@@ -262,17 +273,20 @@ View(subset(df, Product == '107'))
 qplot(Global_Sales, data=sales)+
   labs(title = 'Distribution of Global Sales',
   subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 qplot(NA_Sales, data=sales)+
   labs(title = 'Distribution of NA_Sales',
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 qplot(EU_Sales, data=sales)+
   labs(title = 'Distribution of EU_Sales',
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Scatterplot to see relationship of numeric variables.
 # North America and Europe:
@@ -282,8 +296,10 @@ qplot(NA_Sales,
       geom=c('point', 'jitter'))+
   labs(title = 'North America vs Europe Sales',
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))# Confirm similar distribution for regions.
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
+# Confirm similar distribution for regions.
 # North America and Global sales:
 qplot(NA_Sales,
       Global_Sales,
@@ -291,7 +307,8 @@ qplot(NA_Sales,
       geom=c('point', 'jitter'))+
   labs(title = 'North America vs Global Sales',
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))# Confirm similar distribution for regions.
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Europe and Global sales:
 qplot(EU_Sales,
@@ -300,7 +317,8 @@ qplot(EU_Sales,
       geom=c('point', 'jitter'))+
   labs(title = 'Europe vs Global Sales',
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))# Confirm similar distribution for regions.
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 
 # EU sales to global sales by platform.
@@ -308,21 +326,24 @@ qplot(EU_Sales,
       Global_Sales,
       colour=Platform, 
       data=df,
-      geom=c('point', 'jitter'))
+      geom=c('point', 'jitter')) +
+  theme_classic()
 
 # NA sales to global sales by platform.
 qplot(NA_Sales,
       Global_Sales,
       colour=Platform, 
       data=df,
-      geom=c('point', 'jitter'))
+      geom=c('point', 'jitter')) +
+  theme_classic()
 
 # NA sales to global sales by product is similar.
 qplot(EU_Sales,
       NA_Sales,
       colour=Product, 
       data=df,
-      geom=c('point', 'jitter'))
+      geom=c('point', 'jitter')) +
+  theme_classic()
 
 # Create a barplot to look into products.
 qplot(x=Product,
@@ -330,7 +351,8 @@ qplot(x=Product,
       data=df)+
   labs(title = "Global Sales by Product",
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Adjust the style.
 qplot(x=Product,
@@ -340,13 +362,18 @@ qplot(x=Product,
       geom='col')+
   labs(title = "Global Sales by Product",
        subtitle = 'Turtle Games')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Try plots with one variable.
-qplot(Product, data=df, geom='bar')
-qplot(y=Product, data=df, colour=Platform)
-qplot(y=Product, data=sales, x=Platform, colour=Platform)
-qplot(y=Product, data=sales, colour=Platform)
+qplot(Product, data=df, geom='bar') +
+  theme_classic()
+qplot(y=Product, data=df, colour=Platform) +
+  theme_classic()
+qplot(y=Product, data=sales, x=Platform, colour=Platform) +
+  theme_classic()
+qplot(y=Product, data=sales, colour=Platform) +
+  theme_classic()
 
 # These were not very useful to analyse the data but helps to understand the structure.
 
@@ -356,11 +383,13 @@ sales_other_platforms <- subset(sales, Publisher != 'Nintendo')
 
 # The visualisation can be checked together with the data in View.
 View(sales_nintendo)
-qplot(y=Product, data=sales_nintendo, colour=Platform)
+qplot(y=Product, data=sales_nintendo, colour=Platform) +
+  theme_classic()
 
 # The visualisation can be checked together with the data in View.
 # View(sales_other_platforms)
-qplot(y=Product, data=sales_other_platforms, colour=Platform)
+qplot(y=Product, data=sales_other_platforms, colour=Platform) +
+  theme_classic()
 
 # From the data it is not clear how to separate Nintendo products and platforms, some 
 # consultation with the stakeholders could be useful.
@@ -369,44 +398,52 @@ qplot(y=Product, data=sales_other_platforms, colour=Platform)
 qplot(Global_Sales, data=sales, geom='boxplot')+
   labs(title = "Global Sales",
        subtitle = 'Turtle Games ((£mio)')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Regions show similar distribution.
 qplot(NA_Sales, data=sales, geom='boxplot')+
   labs(title = "North America Sales",
        subtitle = 'Turtle Games ((£mio)')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 qplot(EU_Sales, data=sales, geom='boxplot')+
   labs(title = "Europe Sales",
        subtitle = 'Turtle Games ((£mio)')+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Explore the categories using barcharts.
 # Total sales by platform, barchart.
-qplot(Platform, Global_Sales, data=sales, geom='bar')+
+qplot(Platform, Global_Sales, data=sales, geom='col')+
   labs(title = "Global Sales by Platform",
        subtitle = 'Turtle Games')+
   coord_flip()+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
+
 
 # Total Sales by genre, barchart.
-qplot(Genre, fill=Global_Sales, data=sales, geom='bar')+
+qplot(Genre, Global_Sales, data=sales, geom='col')+
   labs(title = "Global Sales by Genre",
        subtitle = 'Turtle Games')+
   coord_flip()+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
                          
 # Total Sales by publisher, barchart.                   
 ## Three publishers represent over 50 per cent of sales
-qplot(Publisher, fill=Global_Sales, data=sales, geom='bar')+
+qplot(Publisher, Global_Sales, data=sales, geom='col')+
   labs(title = "Global Sales by Publisher ",
        subtitle = 'Turtle Games')+
   coord_flip()+
-  theme(plot.title = element_text(size = 30))
+  theme(plot.title = element_text(size = 30)) +
+  theme_classic()
 
 # Try stacked bar qplot
-qplot(Product, Global_Sales, fill=Platform, data=df, geom='col')
+qplot(Product, Global_Sales, fill=Platform, data=df, geom='col') +
+  theme_classic()
 
 # Visualise the difference between EU and NA sales.
 qplot(Sales_gap, data=df, colour=Platform, geom='boxplot')+
